@@ -1,0 +1,35 @@
+version: '2'
+services:
+  user_and_bird:
+    image: vladislavsavi/users_and_birds:main
+    ports:
+      - "8081:8080"
+    container_name: nodejs
+    networks:
+      - app-network
+    environment:
+      - DB_CONTAINER=mongoDb
+    depends_on:
+      - mongoDb
+    links:
+      - mongoDb
+    volumes:
+      - dbdata:/data/db
+
+  mongoDb:
+    image: mongo
+    container_name: mongoDb
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - dbdata:/datas/db
+    ports:
+      - "27018:27017"
+    
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
