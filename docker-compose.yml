@@ -16,16 +16,16 @@ services:
     volumes:
       - dbdata:/data/db
 
-    front:
-      image: vladislavsavi/users_and_birds_front:main
-      container_name: front
-      build:
-        context: .
-      volumes:
-        - '.:/app'
-        - '/app/node_modules'
-      ports:
-        - 5002:5001  
+  front:
+    image: vladislavsavi/users_and_birds_front:main
+    container_name: front
+    build:
+      context: .
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 5002:5001  
 
   mongoDb:
     image: mongo
